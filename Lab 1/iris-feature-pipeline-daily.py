@@ -1,17 +1,8 @@
 import os
-import modal
+# import modal
     
 BACKFILL=False
 LOCAL=False
-
-if LOCAL == False:
-   stub = modal.Stub()
-   image = modal.Image.debian_slim().pip_install(["hopsworks","joblib","seaborn","sklearn","dataframe-image"]) 
-
-   @stub.function(image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("jim-hopsworks-ai"))
-   def f():
-       g()
-
 
 def generate_flower(name, sepal_len_max, sepal_len_min, sepal_width_max, sepal_width_min, 
                     petal_len_max, petal_len_min, petal_width_max, petal_width_min):
@@ -79,6 +70,3 @@ def g():
 if __name__ == "__main__":
     if LOCAL == True :
         g()
-    else:
-        with stub.run():
-            f()
