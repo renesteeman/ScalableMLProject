@@ -1,5 +1,4 @@
 import os
-# import modal
     
 LOCAL=True
 
@@ -15,6 +14,9 @@ def g():
     from matplotlib import pyplot
     import seaborn as sns
     import requests
+
+    # Hopsworks requires an environment variable
+    #
 
     project = hopsworks.login()
     fs = project.get_feature_store()
