@@ -8,7 +8,7 @@ def g():
 
     project = hopsworks.login()
     fs = project.get_feature_store()
-    iris_df = pd.read_csv("titanic.csv")
+    iris_df = pd.read_csv("data_titanic.csv")
     iris_fg = fs.get_or_create_feature_group(
         name="titanic_modal",
         version=1,
