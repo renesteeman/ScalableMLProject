@@ -25,8 +25,8 @@ def g():
     try: 
         feature_view = fs.get_feature_view(name="titanic_modal", version=1)
     except:
-        iris_fg = fs.get_feature_group(name="titanic_modal", version=1)
-        query = iris_fg.select_all()
+        passenger_fg = fs.get_feature_group(name="titanic_modal", version=1)
+        query = passenger_fg.select_all()
         feature_view = fs.create_feature_view(name="titanic_modal",
                                           version=1,
                                           description="Read from Iris flower dataset",
