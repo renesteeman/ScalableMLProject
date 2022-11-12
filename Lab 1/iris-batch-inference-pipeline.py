@@ -15,9 +15,6 @@ def g():
     import seaborn as sns
     import requests
 
-    # Hopsworks requires an environment variable
-    #
-
     project = hopsworks.login()
     fs = project.get_feature_store()
     
