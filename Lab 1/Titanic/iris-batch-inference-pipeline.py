@@ -21,40 +21,41 @@ def g():
     mr = project.get_model_registry()
     model = mr.get_model("titanic_modal", version=1)
     model_dir = model.download()
-    model = joblib.load(model_dir + "/iris_model.pkl")
+    model = joblib.load(model_dir + "/titanic_model.pkl")
     
     feature_view = fs.get_feature_view(name="titanic_modal", version=1)
     batch_data = feature_view.get_batch_data()
     
     y_pred = model.predict(batch_data)
     # print(y_pred)
-    flower = y_pred[y_pred.size-1]
-    flower_url = "https://raw.githubusercontent.com/featurestoreorg/serverless-ml-course/main/src/01-module/assets/" + flower + ".png"
-    print("Flower predicted: " + flower)
-    img = Image.open(requests.get(flower_url, stream=True).raw)            
-    img.save("./latest_iris.png")
+    passenger = y_pred[y_pred.size-1]
+    passenger_url = "https://raw.githubusercontent.com/featurestoreorg/serverless-ml-course/main/src/01-module/assets/" + passenger + ".png"
+    print("Survival predicted: " + passenger)
+    img = Image.open(requests.get(passenger_url, stream=True).raw)            
+    img.save("./latest_passenger.png")
     dataset_api = project.get_dataset_api()    
-    dataset_api.upload("./latest_iris.png", "Resources/images", overwrite=True)
+    dataset_api.upload("./latest_passenger.png", "Resources/images", overwrite=True)
     
     iris_fg = fs.get_feature_group(name="titanic_modal", version=1)
     df = iris_fg.read()
     # print(df["variety"])
     label = df.iloc[-1]["variety"]
+    # TODO update to drowning image
     label_url = "https://raw.githubusercontent.com/featurestoreorg/serverless-ml-course/main/src/01-module/assets/" + label + ".png"
-    print("Flower actual: " + label)
+    print("passenger actual: " + label)
     img = Image.open(requests.get(label_url, stream=True).raw)            
-    img.save("./actual_iris.png")
-    dataset_api.upload("./actual_iris.png", "Resources/images", overwrite=True)
+    img.save("./actual_passenger.png")
+    dataset_api.upload("./actual_passenger.png", "Resources/images", overwrite=True)
     
-    monitor_fg = fs.get_or_create_feature_group(name="iris_predictions",
+    monitor_fg = fs.get_or_create_feature_group(name="passenger_predictions",
                                                 version=1,
                                                 primary_key=["datetime"],
-                                                description="Iris flower Prediction/Outcome Monitoring"
+                                                description="Passenger Prediction/Outcome Monitoring"
                                                 )
     
     now = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     data = {
-        'prediction': [flower],
+        'prediction': [passenger],
         'label': [label],
         'datetime': [now],
        }
@@ -74,21 +75,21 @@ def g():
     predictions = history_df[['prediction']]
     labels = history_df[['label']]
 
-    # Only create the confusion matrix when our iris_predictions feature group has examples of all 3 iris flowers
-    print("Number of different flower predictions to date: " + str(predictions.value_counts().count()))
-    if predictions.value_counts().count() == 3:
+    # Only create the confusion matrix when our passenger_predictions feature group has examples of all 3 iris passengers
+    print("Number of different passenger predictions to date: " + str(predictions.value_counts().count()))
+    if predictions.value_counts().count() == 2:
         results = confusion_matrix(labels, predictions)
     
-        df_cm = pd.DataFrame(results, ['True Setosa', 'True Versicolor', 'True Virginica'],
-                             ['Pred Setosa', 'Pred Versicolor', 'Pred Virginica'])
+        df_cm = pd.DataFrame(results, ['True survived', 'True died'],
+                             ['Pred survived', 'Pred died'])
     
         cm = sns.heatmap(df_cm, annot=True)
         fig = cm.get_figure()
         fig.savefig("./confusion_matrix.png")
         dataset_api.upload("./confusion_matrix.png", "Resources/images", overwrite=True)
     else:
-        print("You need 3 different flower predictions to create the confusion matrix.")
-        print("Run the batch inference pipeline more times until you get 3 different iris flower predictions") 
+        print("You need 2 different passenger predictions to create the confusion matrix.")
+        print("Run the batch inference pipeline more times until you get 2 different passenger predictions")
 
 
 if __name__ == "__main__":
