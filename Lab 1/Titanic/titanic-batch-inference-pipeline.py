@@ -29,9 +29,9 @@ def g():
     y_pred = model.predict(batch_data)
     # print(y_pred)
     passenger = y_pred[y_pred.size-1]
-    passenger_url = "https://raw.githubusercontent.com/featurestoreorg/serverless-ml-course/main/src/01-module/assets/" + passenger + ".png"
-    print("Survival predicted: " + passenger)
-    img = Image.open(requests.get(passenger_url, stream=True).raw)            
+    passenger_url = "yee.png"
+    print("Survival predicted: " + str(passenger))
+    img = Image.open(passenger_url)
     img.save("./latest_passenger.png")
     dataset_api = project.get_dataset_api()    
     dataset_api.upload("./latest_passenger.png", "Resources/images", overwrite=True)
@@ -39,11 +39,11 @@ def g():
     iris_fg = fs.get_feature_group(name="titanic_modal", version=1)
     df = iris_fg.read()
     # print(df["variety"])
-    label = df.iloc[-1]["variety"]
+    label = df.iloc[-1]["survived"]
     # TODO update to drowning image
-    label_url = "https://raw.githubusercontent.com/featurestoreorg/serverless-ml-course/main/src/01-module/assets/" + label + ".png"
-    print("passenger actual: " + label)
-    img = Image.open(requests.get(label_url, stream=True).raw)            
+    label_url = "yee.png"
+    print("passenger actual: " + str(label))
+    img = Image.open(label_url)
     img.save("./actual_passenger.png")
     dataset_api.upload("./actual_passenger.png", "Resources/images", overwrite=True)
     
