@@ -8,12 +8,12 @@ def g():
 
     project = hopsworks.login()
     fs = project.get_feature_store()
-    iris_df = pd.read_csv("https://repo.hops.works/master/hopsworks-tutorials/data/iris.csv")
+    iris_df = pd.read_csv("titanic.csv")
     iris_fg = fs.get_or_create_feature_group(
-        name="iris_modal",
+        name="titanic_modal",
         version=1,
-        primary_key=["sepal_length","sepal_width","petal_length","petal_width"], 
-        description="Iris flower dataset")
+        primary_key=["Pclass", "Sex", "Age", "Parch"], 
+        description="Titanic passenger survival dataset")
     iris_fg.insert(iris_df, write_options={"wait_for_job" : False})
 
 if __name__ == "__main__":
