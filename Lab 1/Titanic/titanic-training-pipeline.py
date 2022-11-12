@@ -29,8 +29,8 @@ def g():
         query = passenger_fg.select_all()
         feature_view = fs.create_feature_view(name="titanic_modal",
                                           version=1,
-                                          description="Read from Iris flower dataset",
-                                          labels=["variety"],
+                                          description="Read from Titanic dataset",
+                                          labels=["survived"],
                                           query=query)    
 
     # You can read training data, randomly split into train/test sets of features (X) and labels (y)        
