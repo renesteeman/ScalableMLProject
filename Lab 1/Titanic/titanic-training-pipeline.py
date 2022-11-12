@@ -48,21 +48,21 @@ def g():
     results = confusion_matrix(y_test, y_pred)
 
     # Create the confusion matrix as a figure, we will later store it as a PNG image file
-    df_cm = pd.DataFrame(results, ['True Setosa', 'True Versicolor', 'True Virginica'],
-                         ['Pred Setosa', 'Pred Versicolor', 'Pred Virginica'])
+    df_cm = pd.DataFrame(results, ['True survived', 'True died'],
+                         ['Pred survived', 'Pred died'])
     cm = sns.heatmap(df_cm, annot=True)
     fig = cm.get_figure()
 
     # We will now upload our model to the Hopsworks Model Registry. First get an object for the model registry.
     mr = project.get_model_registry()
     
-    # The contents of the 'iris_model' directory will be saved to the model registry. Create the dir, first.
-    model_dir="iris_model"
+    # The contents of the 'titanic_model' directory will be saved to the model registry. Create the dir, first.
+    model_dir="titanic_model"
     if os.path.isdir(model_dir) == False:
         os.mkdir(model_dir)
 
     # Save both our model and the confusion matrix to 'model_dir', whose contents will be uploaded to the model registry
-    joblib.dump(model, model_dir + "/iris_model.pkl")
+    joblib.dump(model, model_dir + "/titanic_model.pkl")
     fig.savefig(model_dir + "/confusion_matrix.png")    
 
 
@@ -72,15 +72,15 @@ def g():
     model_schema = ModelSchema(input_schema, output_schema)
 
     # Create an entry in the model registry that includes the model's name, desc, metrics
-    iris_model = mr.python.create_model(
+    titanic_model = mr.python.create_model(
         name="titanic_modal", 
         metrics={"accuracy" : metrics['accuracy']},
         model_schema=model_schema,
-        description="Iris Flower Predictor"
+        description="Titanic Survival Predictor"
     )
     
     # Upload the model to the model registry, including all files in 'model_dir'
-    iris_model.save(model_dir)
+    titanic_model.save(model_dir)
     
 if __name__ == "__main__":
     if LOCAL == True :
