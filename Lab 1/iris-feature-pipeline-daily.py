@@ -1,7 +1,7 @@
 import os
     
 BACKFILL=False
-LOCAL=False
+LOCAL=True
 
 def generate_flower(name, sepal_len_max, sepal_len_min, sepal_width_max, sepal_width_min, 
                     petal_len_max, petal_len_min, petal_width_max, petal_width_min):

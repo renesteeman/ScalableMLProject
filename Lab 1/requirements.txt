@@ -5,6 +5,3 @@ seaborn
 dataframe-image
 modal-client
 gradio
-scikit-learn
-joblib
-lxml
