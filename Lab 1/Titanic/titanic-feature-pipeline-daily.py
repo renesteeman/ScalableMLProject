@@ -3,8 +3,7 @@ import os
 BACKFILL=False
 LOCAL=True
 
-def generate_passenger(survived, sepal_len_max, sepal_len_min, sepal_width_max, sepal_width_min, 
-                    petal_len_max, petal_len_min, petal_width_max, petal_width_min):
+def generate_passenger(survived):
     """
     Returns a single passenger data as a single row in a DataFrame.
     """
