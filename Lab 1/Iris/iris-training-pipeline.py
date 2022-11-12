@@ -23,11 +23,11 @@ def g():
     # The feature view is the input set of features for your model. The features can come from different feature groups.    
     # You can select features from different feature groups and join them together to create a feature view
     try: 
-        feature_view = fs.get_feature_view(name="iris_modal", version=1)
+        feature_view = fs.get_feature_view(name="titanic_modal", version=1)
     except:
-        iris_fg = fs.get_feature_group(name="iris_modal", version=1)
+        iris_fg = fs.get_feature_group(name="titanic_modal", version=1)
         query = iris_fg.select_all()
-        feature_view = fs.create_feature_view(name="iris_modal",
+        feature_view = fs.create_feature_view(name="titanic_modal",
                                           version=1,
                                           description="Read from Iris flower dataset",
                                           labels=["variety"],
@@ -73,7 +73,7 @@ def g():
 
     # Create an entry in the model registry that includes the model's name, desc, metrics
     iris_model = mr.python.create_model(
-        name="iris_modal", 
+        name="titanic_modal", 
         metrics={"accuracy" : metrics['accuracy']},
         model_schema=model_schema,
         description="Iris Flower Predictor"

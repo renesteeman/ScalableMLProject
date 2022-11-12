@@ -19,11 +19,11 @@ def g():
     fs = project.get_feature_store()
     
     mr = project.get_model_registry()
-    model = mr.get_model("iris_modal", version=1)
+    model = mr.get_model("titanic_modal", version=1)
     model_dir = model.download()
     model = joblib.load(model_dir + "/iris_model.pkl")
     
-    feature_view = fs.get_feature_view(name="iris_modal", version=1)
+    feature_view = fs.get_feature_view(name="titanic_modal", version=1)
     batch_data = feature_view.get_batch_data()
     
     y_pred = model.predict(batch_data)
@@ -36,7 +36,7 @@ def g():
     dataset_api = project.get_dataset_api()    
     dataset_api.upload("./latest_iris.png", "Resources/images", overwrite=True)
     
-    iris_fg = fs.get_feature_group(name="iris_modal", version=1)
+    iris_fg = fs.get_feature_group(name="titanic_modal", version=1)
     df = iris_fg.read()
     # print(df["variety"])
     label = df.iloc[-1]["variety"]
