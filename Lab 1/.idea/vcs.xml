@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ScalableML_lab1_space1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ScalableML_lab1_space2" vcs="Git" />
   </component>
 </project>

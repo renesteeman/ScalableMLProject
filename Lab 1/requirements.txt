@@ -7,3 +7,4 @@ modal-client
 gradio
 scikit-learn
 joblib
+lxml
