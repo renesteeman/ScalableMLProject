@@ -14,7 +14,7 @@ def generate_passenger(survived):
     df = pd.DataFrame({ 
         "PassengerId": [random.randint(1000, 2000)],
         "Pclass": [random.randint(1, 3)],
-        "Sex": [random.choice(['male', 'female'])],
+        "Sex": [random.randint(0, 1)],
         "Age": [random.randint(0, 100)],
         "Parch": [random.randint(0, 2)]
     })
