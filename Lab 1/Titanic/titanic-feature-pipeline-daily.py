@@ -10,12 +10,12 @@ def generate_passenger(survived):
     import pandas as pd
     import random
 
-# PassengerId,Survived,Pclass,Sex,Age,Parch
+    # PassengerId,Survived,Pclass,Sex,Age,Parch
     df = pd.DataFrame({ 
-        "PassengerId": [random.randint(1000, 2000)],
+        # "PassengerId": [random.randint(1000, 2000)],
         "Pclass": [random.randint(1, 3)],
         "Sex": [random.randint(0, 1)],
-        "Age": [random.randint(0, 100)],
+        "Age": [random.randrange(0, 100)],
         "Parch": [random.randint(0, 2)]
     })
     df['Survived'] = survived
@@ -60,7 +60,7 @@ def g():
     iris_fg = fs.get_or_create_feature_group(
         name="titanic_modal",
         version=1,
-        primary_key=["PassengerId", "Pclass", "Sex", "Age", "Parch"], 
+        primary_key=["Pclass", "Sex", "Age", "Parch"], 
         description="Titanic dataset")
     iris_fg.insert(titanic_df, write_options={"wait_for_job" : False})
 
