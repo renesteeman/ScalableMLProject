@@ -8,13 +8,13 @@ def g():
 
     project = hopsworks.login()
     fs = project.get_feature_store()
-    iris_df = pd.read_csv("data_titanic.csv")
-    iris_fg = fs.get_or_create_feature_group(
+    titanic_df = pd.read_csv("data_titanic.csv")
+    titanic_fg = fs.get_or_create_feature_group(
         name="titanic_modal",
         version=1,
         primary_key=["Pclass", "Sex", "Age", "Parch"], 
         description="Titanic passenger survival dataset")
-    iris_fg.insert(iris_df, write_options={"wait_for_job" : False})
+    titanic_fg.insert(titanic_df, write_options={"wait_for_job" : False})
 
 if __name__ == "__main__":
     if LOCAL == True :

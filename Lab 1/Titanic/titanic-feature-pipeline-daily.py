@@ -57,12 +57,12 @@ def g():
     else:
         titanic_df = get_random_passenger_data()
 
-    iris_fg = fs.get_or_create_feature_group(
+    titanic_fg = fs.get_or_create_feature_group(
         name="titanic_modal",
         version=1,
         primary_key=["Pclass", "Sex", "Age", "Parch"], 
         description="Titanic dataset")
-    iris_fg.insert(titanic_df, write_options={"wait_for_job" : False})
+    titanic_fg.insert(titanic_df, write_options={"wait_for_job" : False})
 
 if __name__ == "__main__":
     if LOCAL == True :
