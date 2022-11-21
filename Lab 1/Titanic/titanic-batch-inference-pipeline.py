@@ -29,21 +29,26 @@ def g():
     y_pred = model.predict(batch_data)
     # print(y_pred)
     passenger = y_pred[y_pred.size-1]
-    passenger_url = "yee.png"
+    if passenger == 0:
+        passenger_url = "https://lh3.googleusercontent.com/drive-viewer/AFDK6gNF4xxysDnR9rP3VtnQ0gqQABJaF9MHN6fx9ndnGEp3HwuAH8X4Qh-ewYGg-DbgtNM0q3mKfBKVNK2wyvZdPkGvnKpE=w1920-h487"
+    elif passenger == 1:
+        passenger_url = "https://lh3.googleusercontent.com/fife/AAbDypAIrE-Me7Sqj3LvMGiOSqrypr9JZfdlWp46clUTEYaZC6zzZeF0iT2zi49Hrj8B0-I4DNb7ce1bqCAFDbNMhQnPNhtjXmrgfV-aFuGpUc6otrmuBT8mM6xpeyW5ljhTcLKTg2YUaY6E2d_XCj8WHY3BTXJvbU55KyOplRicpcLpElmXW2s4RW9op-3waE4p6uY0fIRphNMfxjCZDpCzlmni-zq3RsT3YL8CZaV_03CfW84ntB4nirFedH6zfuWhgreTdKmw6lqoHWm9QgRji33fJJ4bG9APfQCB2anF9z7GJJ3_pcHr39e4qtwxeKIta8sFUsXPKZE7SEHPNdfO_yGV34vMDxsfBUgbRLNOzw06HAVQuvUk1Oe4DSd1GyZxNWsSzw1D8DZhvZzHxHlFcc27d_qglMEtNQGVhulZFb2A3ZGR9I2Us7jog2UVnpjyGTLBlMUX_-K1WpUSbsoq9aHGb6rOWN4ZyZ5r2c_yJU4NzFNmQDZInKBsZKEK0S7oAm69VQ8RVZ6O_3vgy-7K-r-3pEPnTuDVFEndSwDJvYOulagpCEy0i-LhdToN0C2Va6wBAAocXHgsif9PcuR7IAmql-gk06iBGt1YtveOBNfAakoTqvD-BGPHLARGosKoS0csT_AJENIV3wIgEYr7E6plpNBvUSjpQGvGF3Bv1WUPQxZkEof4VV1loqX1vDHQYo4IPpbLBhyPnK_Ate09BPkDc4qEmqhgREEddDQbxzYF2yLz_U-wt_IGbJfUlBikFK6QA8emZUG06yc3vEl4y7bhA1Ofy4eEySMqKhCsKdNQfwzydTUUhvG3U5D70dXXhF0rZy6HfwuIJ-wneawSyvKScEyHBH07vE1YYoMKZO8HmAYboDbaHg5Vyy4cEH8Q4ORi8_9WDxPaGbmsXlqmeEtpplm6CKCq8Qsbc7vKelIzqe7rxZfffBbEjKrA8pp2eBD21Z9zJu5MmitKgj3DPWKxMsCLyuKz02ple_NT8IIpliGP7IUJ2W30x5xEmuCB8-winTszhSGOY_49tywV4x8oumgGeT6qzqrde1qlZkeOX_I5SxHgP56o3ApiI_sDSjaWOHyTmY3FQfBAq9_zTCosvS9113S2mXdeSSGYPTW_8303TqoXEYrGiEwwRitA_-0r-BgxfbPCk7muZfqpr5sgnjoDsTmcgxHXFWVr91IASGIz_8Igl5llof951CndkvDrJFuHycKNxjifzBqe-41Ivw-v-IJ8lpB28yiIjw6rtoiTflGOnUK-dnrbanykYus3vhitOZ_r1JCUWK9nU6o4WxcHzJONVyhG3Nt_-vk_EHncI_bWjTfKE8FUDH94QuO3bU6R1T-5sJKmueOGpIG-4jlMx1V4LM6ylel3Dv6k_dh9Ah7WCs6IsMRQ-_7lWOt9dCNntEdcm2hc9jRrrBxgMSB-6IJ5c90MXjj-yiYisGH3K6keppoR9iaddtKWkyo3d0VEobsTPRUyMdQ=w1920-h892"
     print("Survival predicted: " + str(passenger))
-    img = Image.open(passenger_url)
+    img = Image.open(requests.get(passenger_url, stream=True).raw) 
     img.save("./latest_passenger.png")
     dataset_api = project.get_dataset_api()    
     dataset_api.upload("./latest_passenger.png", "Resources/images", overwrite=True)
     
-    iris_fg = fs.get_feature_group(name="titanic_modal", version=1)
-    df = iris_fg.read()
+    titanic_fg = fs.get_feature_group(name="titanic_modal", version=1)
+    df = titanic_fg.read()
     # print(df["variety"])
     label = df.iloc[-1]["survived"]
-    # TODO update to drowning image
-    label_url = "yee.png"
+    if label == 0:
+        label_url = "https://lh3.googleusercontent.com/drive-viewer/AFDK6gNF4xxysDnR9rP3VtnQ0gqQABJaF9MHN6fx9ndnGEp3HwuAH8X4Qh-ewYGg-DbgtNM0q3mKfBKVNK2wyvZdPkGvnKpE=w1920-h487"
+    if label == 1:
+        label_url = "https://lh3.googleusercontent.com/fife/AAbDypAIrE-Me7Sqj3LvMGiOSqrypr9JZfdlWp46clUTEYaZC6zzZeF0iT2zi49Hrj8B0-I4DNb7ce1bqCAFDbNMhQnPNhtjXmrgfV-aFuGpUc6otrmuBT8mM6xpeyW5ljhTcLKTg2YUaY6E2d_XCj8WHY3BTXJvbU55KyOplRicpcLpElmXW2s4RW9op-3waE4p6uY0fIRphNMfxjCZDpCzlmni-zq3RsT3YL8CZaV_03CfW84ntB4nirFedH6zfuWhgreTdKmw6lqoHWm9QgRji33fJJ4bG9APfQCB2anF9z7GJJ3_pcHr39e4qtwxeKIta8sFUsXPKZE7SEHPNdfO_yGV34vMDxsfBUgbRLNOzw06HAVQuvUk1Oe4DSd1GyZxNWsSzw1D8DZhvZzHxHlFcc27d_qglMEtNQGVhulZFb2A3ZGR9I2Us7jog2UVnpjyGTLBlMUX_-K1WpUSbsoq9aHGb6rOWN4ZyZ5r2c_yJU4NzFNmQDZInKBsZKEK0S7oAm69VQ8RVZ6O_3vgy-7K-r-3pEPnTuDVFEndSwDJvYOulagpCEy0i-LhdToN0C2Va6wBAAocXHgsif9PcuR7IAmql-gk06iBGt1YtveOBNfAakoTqvD-BGPHLARGosKoS0csT_AJENIV3wIgEYr7E6plpNBvUSjpQGvGF3Bv1WUPQxZkEof4VV1loqX1vDHQYo4IPpbLBhyPnK_Ate09BPkDc4qEmqhgREEddDQbxzYF2yLz_U-wt_IGbJfUlBikFK6QA8emZUG06yc3vEl4y7bhA1Ofy4eEySMqKhCsKdNQfwzydTUUhvG3U5D70dXXhF0rZy6HfwuIJ-wneawSyvKScEyHBH07vE1YYoMKZO8HmAYboDbaHg5Vyy4cEH8Q4ORi8_9WDxPaGbmsXlqmeEtpplm6CKCq8Qsbc7vKelIzqe7rxZfffBbEjKrA8pp2eBD21Z9zJu5MmitKgj3DPWKxMsCLyuKz02ple_NT8IIpliGP7IUJ2W30x5xEmuCB8-winTszhSGOY_49tywV4x8oumgGeT6qzqrde1qlZkeOX_I5SxHgP56o3ApiI_sDSjaWOHyTmY3FQfBAq9_zTCosvS9113S2mXdeSSGYPTW_8303TqoXEYrGiEwwRitA_-0r-BgxfbPCk7muZfqpr5sgnjoDsTmcgxHXFWVr91IASGIz_8Igl5llof951CndkvDrJFuHycKNxjifzBqe-41Ivw-v-IJ8lpB28yiIjw6rtoiTflGOnUK-dnrbanykYus3vhitOZ_r1JCUWK9nU6o4WxcHzJONVyhG3Nt_-vk_EHncI_bWjTfKE8FUDH94QuO3bU6R1T-5sJKmueOGpIG-4jlMx1V4LM6ylel3Dv6k_dh9Ah7WCs6IsMRQ-_7lWOt9dCNntEdcm2hc9jRrrBxgMSB-6IJ5c90MXjj-yiYisGH3K6keppoR9iaddtKWkyo3d0VEobsTPRUyMdQ=w1920-h892"
     print("passenger actual: " + str(label))
-    img = Image.open(label_url)
+    img = Image.open(requests.get(label_url, stream=True).raw)
     img.save("./actual_passenger.png")
     dataset_api.upload("./actual_passenger.png", "Resources/images", overwrite=True)
     
@@ -75,7 +80,7 @@ def g():
     predictions = history_df[['prediction']]
     labels = history_df[['label']]
 
-    # Only create the confusion matrix when our passenger_predictions feature group has examples of all 3 iris passengers
+    # Only create the confusion matrix when our passenger_predictions feature group has examples of all 3 passengers
     print("Number of different passenger predictions to date: " + str(predictions.value_counts().count()))
     if predictions.value_counts().count() == 2:
         results = confusion_matrix(labels, predictions)

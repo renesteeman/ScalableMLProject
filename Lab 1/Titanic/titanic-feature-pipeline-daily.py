@@ -15,7 +15,7 @@ def generate_passenger(survived):
         # "PassengerId": [random.randint(1000, 2000)],
         "Pclass": [random.randint(1, 3)],
         "Sex": [random.randint(0, 1)],
-        "Age": [random.randrange(0, 100)],
+        "Age": [random.random()*100],
         "Parch": [random.randint(0, 2)]
     })
     df['Survived'] = survived
