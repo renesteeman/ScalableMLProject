@@ -1,7 +1,7 @@
 import os
     
 BACKFILL=False
-LOCAL=False
+LOCAL=True
 
 def generate_flower(name, sepal_len_max, sepal_len_min, sepal_width_max, sepal_width_min, 
                     petal_len_max, petal_len_min, petal_width_max, petal_width_min):
@@ -60,7 +60,7 @@ def g():
         iris_df = get_random_iris_flower()
 
     iris_fg = fs.get_or_create_feature_group(
-        name="titanic_modal",
+        name="iris_modal",
         version=1,
         primary_key=["sepal_length","sepal_width","petal_length","petal_width"], 
         description="Iris flower dataset")
