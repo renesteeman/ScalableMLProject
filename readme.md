@@ -9,3 +9,7 @@ titanic-training-pipeline is responsible for training the model on the dataset a
 titanic-batch-inference-pipeline is responsbile for generating the confusion matrix and uploading the resulting png to Hopsworks 
 
 The HuggingFace spaces contain app.py which will show the interface, the first space shows input fields for the user to enter a (fictional) passenger and the second shows the recent results and the confusion matrix along with 2 images to show the actual and predicted results.
+
+The irish spaces are
+https://huggingface.co/spaces/renesteeman/ScalableML_lab1_space1
+https://huggingface.co/spaces/renesteeman/ScalableML_lab1_space2
