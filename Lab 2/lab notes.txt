@@ -1,0 +1,9 @@
+pass: train and run the model, register it as a model on hugging face, move gradio part to a hugging face space
+better: explain how to improve the model (and run experiments), break up the notebook into a feature, training and UI pipeline, do something interesting
+
+
+tips/notes: 
+use checkpoints for training
+feature engineering takes about 45m and does not use the GPU
+training time about 6 hours on colab
+Uses about 20gb of storage
