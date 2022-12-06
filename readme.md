@@ -18,8 +18,11 @@ https://huggingface.co/spaces/renesteeman/ScalableML_lab1_space2
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+The original code was split up into a pre-processing, model_training, and inference modules. 
 
+The pre-processing module uses Google Drive for storage, as a lot of storage was required, 200gb storage was purchased. It starts by installing all requirements, then connects to huggingface (used to get the dataset), and loads x% (set to 15 for the 'normal' model to make it fit into memory of a free Colab instance) of the data. It then removes unused columns. To speed up the process, the tiny model was used which is a lot smaller than the small option that the code came with. To pre-process the data, the files are converted into a log-Mel format and downsampled to be in line with Whisper's training data. It then stores the result onto Google Drive. 
 
+The training module connects to the Google Drive to be able to retrieve the pre-processed data. It install all requirements, and then connects to Huggingface where the final model will be stored. It loads the data from Google Drive and loads the model. It uses the wer (word error rate) metric to determine how well the model performs, this equals (substitutions + deletions + inserts)/reference_length. We also turned down the max_steps to speedup the process and lowered the per_device_train_batch_size as we were having issues with a lack of memory, additionally we save the model every 500 steps so we could continue training later in case the notebook would disconnect. Finally, the best version of the model is pushed to Huggingface.
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
