@@ -13,3 +13,23 @@ The HuggingFace spaces contain app.py which will show the interface, the first s
 The irish spaces are
 https://huggingface.co/spaces/renesteeman/ScalableML_lab1_space1
 https://huggingface.co/spaces/renesteeman/ScalableML_lab1_space2
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+For the final project, we want to build an application that is given a set of articles/tweets/messages and returns you the topic and the stance of each item. This could be used as part of a recommendation that system that would automatically sort a set of articles into different opinions, allowing you to quickly discover the different ways of looking at an issue.
+
+The available data consists of Zero-Shot Stance Detection: A Dataset and Model using Generalized Topic Representation https://github.com/emilyallaway/zero-shot-stance/tree/master/data, which contains posts along with their topic(s) and stance. 
+
+As this is a large unsolved research problem (both correctly classifying the topic without having a list of possible options, and using stance detection while working with many labels with were not seen in the training data), it might not be possible to build the system exactly as proposed. An alternative would be to use sentiment analysis, which could be done using VADER (https://www.nltk.org/_modules/nltk/sentiment/vader.html) which also wouldn't rely as much on the correct labeling of the topic (as sentiment does not need a target, while stance does)
+
+ 
