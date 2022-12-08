@@ -24,6 +24,8 @@ The pre-processing module uses Google Drive for storage, as a lot of storage was
 
 The training module connects to the Google Drive to be able to retrieve the pre-processed data. It install all requirements, and then connects to Huggingface where the final model will be stored. It loads the data from Google Drive and loads the model. It uses the wer (word error rate) metric to determine how well the model performs, this equals (substitutions + deletions + inserts)/reference_length. We also turned down the max_steps to speedup the process and lowered the per_device_train_batch_size as we were having issues with a lack of memory, additionally we save the model every 500 steps so we could continue training later in case the notebook would disconnect. Finally, the best version of the model is pushed to Huggingface.
 
+For the demos, the transcribing demo with the microphone can be found here: https://huggingface.co/spaces/dhruvshettty/dutch-whisperer.
+The space here: https://huggingface.co/spaces/dhruvshettty/youtube-dutch-whisperer demonstrates transcribing a Dutch video. The `pytube` API is used for downloading the first audio stream from YouTube. The downloaded audio file is in mp4 file format, which is converted into mp3 and stored on the space's local storage. The transcribing then utilises the `pipeline` module from the `transformers` library, where the model trained is retrieved from The Hub.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
